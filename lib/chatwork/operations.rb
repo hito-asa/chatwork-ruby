@@ -7,6 +7,7 @@ module ChatWork
     def install_class_operations(*operations)
       define_create if operations.include?(:create)
       define_get if operations.include?(:get)
+      define_update if operations.include?(:update)
     end
 
     def define_get
