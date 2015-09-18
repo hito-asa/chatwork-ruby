@@ -29,6 +29,16 @@ module ChatWork
       end
     end
 
+    def define_update
+      instance_eval do
+        def update(params = {})
+          @assign_path = parse_if_hash_key_exists(path, params, :room_id)
+          attach_nested_resource_id(params)
+          convert(ChatWork.client.put(@assign_path, params))
+        end
+      end
+    end
+
     private
     def parse_if_hash_key_exists(string, hash, key)
       if hash.include?(key)
